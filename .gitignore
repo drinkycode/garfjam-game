@@ -41,3 +41,12 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+#############
+## HaxeFlixel
+#############
+export/
+# Don't ignore debug folder in Flixel
+!source/org/flixel/system/debug/
+!source/flixel/system/debug/
