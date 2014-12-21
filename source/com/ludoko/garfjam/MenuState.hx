@@ -92,8 +92,10 @@ class MenuState extends FlxState
 		
 		var elapsed:Float = FlxG.elapsed;
 		
-		_pressStart += elapsed * 3;
-		pressStart.y = Math.sin(_pressStart) * 12 + _pressStartY;
+		_pressStartCos += elapsed * 5;
+		_pressStartSin += elapsed * 3;
+		pressStart.x = Math.sin(_pressStartCos) * 16 + _pressStartX;
+		pressStart.y = Math.sin(_pressStartSin) * 12 + _pressStartY;
 		
 		_headSize += elapsed * 0.025;
 		//_headSize += elapsed * 0.00667;
