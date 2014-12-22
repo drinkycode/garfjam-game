@@ -93,4 +93,9 @@ class PlayState extends FlxState
 	{
 		super.update();
 	}	
+	
+	override public function draw():Void 
+	{
+		super.draw();
+	}
 }
