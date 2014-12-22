@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.input.mouse.FlxMouse;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxAngle;
 import flixel.util.FlxMath;
 
 /**
@@ -96,6 +97,11 @@ class PlayState extends FlxState
 	
 	override public function draw():Void 
 	{
+		G.angle += FlxG.elapsed * 180;
+		var r:Float = FlxAngle.asRadians(G.angle);
+		G.cos = Math.cos(r);
+		G.sin = Math.sin(r);
+		
 		super.draw();
 	}
 }

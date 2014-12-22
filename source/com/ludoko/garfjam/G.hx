@@ -14,6 +14,10 @@ class G
 	public static var halfWidth:Int;
 	public static var halfHeight:Int;
 	
+	public static var angle:Float = 0;
+	public static var cos:Float = 0;
+	public static var sin:Float = 0;
+	
 	private static var _initialized:Bool = false;
 	
 	public static function init():Void
