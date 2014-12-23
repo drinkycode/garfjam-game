@@ -9,7 +9,7 @@ import flixel.tweens.misc.AngleTween;
  * ...
  * @author Michael Lee
  */
-class Garfield extends FlxSprite
+class Garfield extends HallucSprite
 {
 
 	public var shadow:FlxSprite;
@@ -75,34 +75,6 @@ class Garfield extends FlxSprite
 		shadow.y = y + 71;
 		
 		_laserCooldown -= elapsed;
-	}
-	
-	override public function draw():Void 
-	{
-		var ox:Float = x;
-		var oy:Float = y;
-		var oalpha:Float = alpha;
-		alpha = alpha * 0.5;
-		
-		super.draw();
-		
-		var inc:Int = 6;
-		var ad:Float = alpha / (inc + 1);
-		
-		for (i in 0 ... inc)
-		{
-			alpha -= ad;
-			
-			var d:Float = (i + 2) * (i + 4);
-			x += G.cos * d;
-			y += G.sin * d;
-			
-			super.draw();
-		}
-		
-		x = ox;
-		y = oy;
-		alpha = oalpha;
 	}
 	
 }

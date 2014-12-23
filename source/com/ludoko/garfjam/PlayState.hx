@@ -1,6 +1,8 @@
 package com.ludoko.garfjam;
 
+import flixel.FlxBasic;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
@@ -9,6 +11,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxAngle;
 import flixel.util.FlxMath;
+import flixel.util.FlxRandom;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -25,6 +28,9 @@ class PlayState extends FlxState
 	public var lasers:FlxGroup;
 	public var lasagnas:FlxGroup;
 	public var gui:GameGUI;
+	
+	private var _lasagnaTimer:Float = 0;
+	private var _lasagnaCooldown:Float = 5;
 	
 	public function new()
 	{
@@ -74,6 +80,7 @@ class PlayState extends FlxState
 		add(bgObjects);
 		add(garfield.shadow);
 		add(garfield);
+		add(lasagnas);
 		add(lasers);
 		add(gui);
 	}
@@ -92,8 +99,26 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		var elapsed:Float = FlxG.elapsed;
+		
+		_lasagnaTimer -= elapsed;
+		if (_lasagnaTimer <= 0)
+		{
+			Lasagna.create(FlxRandom.intRanged(64, FlxG.width - 64), FlxRandom.intRanged(64, FlxG.height - 64));
+			_lasagnaTimer += _lasagnaCooldown;
+		}
+		
 		super.update();
-	}	
+		
+		FlxG.overlap(garfield, lasagnas, garfieldEatsLasagna);
+	}
+	
+	private function garfieldEatsLasagna(Garf:FlxBasic, Lasag:FlxBasic):Void
+	{
+		Lasag.kill();
+		gui.foodBar.amount += 200;
+	}
+	
 	
 	override public function draw():Void 
 	{
